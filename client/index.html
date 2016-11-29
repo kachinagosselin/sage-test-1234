@@ -22,6 +22,31 @@
       <!-- injector:css -->
       <!-- endinjector -->
     <!-- endbuild -->
+
+
+    <!-- Bootstrap Landing Page-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../assets/vendor/device-mockups/device-mockups.min.css">
+
+    <!-- Theme CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
   <body ng-app="paizaqaApp">
     <!--[if lt IE 7]>
@@ -76,22 +101,30 @@
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
-      <script src="components/auth/auth.module.js"></script>
       <script src="app/admin/admin.module.js"></script>
+      <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/account/signup/signup.controller.js"></script>
+      <script src="app/questionsIndex/questionsIndex.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
+      <script src="app/admin/productsIndex/productsIndex.controller.js"></script>
+      <script src="app/admin/productsIndex/productsIndex.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/fromNow/fromNow.filter.js"></script>
+      <script src="app/home/home.js"></script>
+      <script src="app/productsPurchase/jquery.payment.js"></script>
+      <script src="app/productsPurchase/main.js"></script>
+      <script src="app/productsPurchase/productsPurchase.controller.js"></script>
+      <script src="app/productsPurchase/productsPurchase.js"></script>
+      <script src="app/productsPurchase/validation.js"></script>
       <script src="app/questionsCreate/questionsCreate.controller.js"></script>
       <script src="app/questionsCreate/questionsCreate.js"></script>
-      <script src="app/questionsIndex/questionsIndex.controller.js"></script>
+      <script src="app/account/login/login.controller.js"></script>
       <script src="app/questionsIndex/questionsIndex.js"></script>
       <script src="app/questionsShow/questionsShow.controller.js"></script>
       <script src="app/questionsShow/questionsShow.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
       <script src="components/auth/router.decorator.js"></script>
@@ -104,7 +137,7 @@
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
       <script src="components/socket/socket.service.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
+      <script src="app/account/signup/signup.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

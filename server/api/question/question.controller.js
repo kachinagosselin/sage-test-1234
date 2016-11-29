@@ -7,12 +7,13 @@
  * DELETE  /api/questions/:id          ->  destroy
  */
 
-'use strict';
+ 'use strict';
 
-import _ from 'lodash';
-import Question from './question.model';
+ import _ from 'lodash';
+ import Question from './question.model';
+ import User from '../user/user.model';
 
-function respondWithResult(res, statusCode) {
+ function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
@@ -25,9 +26,9 @@ function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
+    .spread(updated => {
+      return updated;
+    });
   };
 }
 
@@ -35,9 +36,9 @@ function removeEntity(res) {
   return function(entity) {
     if (entity) {
       return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
+      .then(() => {
+        res.status(204).end();
+      });
     }
   };
 }
@@ -72,24 +73,41 @@ function handleUnauthorized(req, res) {
 export function index(req, res) {
   var query = req.query.query && JSON.parse(req.query.query);
   Question.find(query).sort({createdAt: -1}).limit(20).execAsync()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Gets a single Question from the DB
 export function show(req, res) {
   Question.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Creates a new Question in the DB
 export function create(req, res) {
   req.body.user = req.user;
   Question.createAsync(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+  .then(respondWithResult(res, 201))
+  .catch(handleError(res));
+  console.log("User:" + req.user)
+  console.log("Find user and update")
+  User.findById(req.user._id, function(err, user) {
+   if (err) throw err;
+
+   user.credits = user.credits + 1;
+   console.log('New credit value: ' + user.credits);
+   console.log(user)
+
+   user.save(function(err) {
+    if (err) throw err;
+    console.log('User successfully updated!');
+  });
+ });
+  // User.findOneAndUpdate({_id:req.user._id}, {credits: 1}, function (err, user) {
+  //    console.log(resp)
+  // });
 }
 
 // Updates an existing Question in the DB
@@ -98,20 +116,20 @@ export function update(req, res) {
     delete req.body._id;
   }
   Question.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(handleUnauthorized(req, res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(handleUnauthorized(req, res))
+  .then(saveUpdates(req.body))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Deletes a Question from the DB
 export function destroy(req, res) {
   Question.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(handleUnauthorized(req, res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(handleUnauthorized(req, res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 }
 
 export function createAnswer(req, res) {
@@ -296,19 +314,19 @@ var pushOrPullStarAnswerComment = function(op, req, res) {
         doc[op] = {};
         doc[op]['answers.' + i + '.comments.$.stars'] = req.user.id;
         // Question.update({_id: req.params.id, 'answers.' + i + '.comments._id': req.params.commentId}, {op: {('answers.' + i + '.comments.$.stars'): req.user.id}}, function(err, num){
-        /*jshint -W083 */
-        Question.update(conditions, doc, function(err, num){
-          if(err) { return handleError(res)(err); }
-          if(num === 0) { return res.send(404).end(); }
-          exports.show(req, res);
-          return;
-        });
+          /*jshint -W083 */
+          Question.update(conditions, doc, function(err, num){
+            if(err) { return handleError(res)(err); }
+            if(num === 0) { return res.send(404).end(); }
+            exports.show(req, res);
+            return;
+          });
+        }
       }
-    }
-    if(!found){
-      return res.send(404).end();
-    }
-  });
+      if(!found){
+        return res.send(404).end();
+      }
+    });
 };
 export function starAnswerComment(req, res) {
   pushOrPullStarAnswerComment('$push', req, res);

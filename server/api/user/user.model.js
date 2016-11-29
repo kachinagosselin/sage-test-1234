@@ -22,7 +22,11 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  credits: {
+    type: Number,
+    default: 0
+  }
 });
 
 /**

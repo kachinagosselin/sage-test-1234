@@ -1,0 +1,45 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Products</h1>
+<!--     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+ -->  </div>
+</header>
+
+<div class="container" infinite-scroll='nextPage()' infinite-scroll-disabled='busy || noMoreData'>
+  <br/>
+  <div style="text-align: center">
+    <a type="button" class="btn btn-primary" href="/products/create">Add Product - not live</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in products">
+        <td style="text-align: left; vertical-align:middle">
+          <div >{{product.name}}</div>
+        </td>
+        <td style="text-align: left; vertical-align:middle">
+          <div > <a ng-href="/products/show/{{product._id}}">{{product.name}}</a></div>
+        </td>
+        <td>
+          <div style="float: right;">
+          <div >${{product.amount/100}}</div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div>
+            <span ng-repeat="tag in product.tags">
+              &nbsp;
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div ng-show='busy'>Loading data...</div>
+</div>

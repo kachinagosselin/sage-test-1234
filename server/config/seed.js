@@ -6,6 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Product from '../api/product/product.model';
 
 Thing.find({}).removeAsync()
   .then(() => {
@@ -52,8 +53,29 @@ User.find({}).removeAsync()
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin'
+    }, {
+      provider: 'local',
+      name: 'Kachina Gosselin',
+      email: 'kachina@alum.mit.edu',
+      password: 'password'
     })
     .then(() => {
       console.log('finished populating users');
+    });
+  });
+
+Product.find({}).removeAsync()
+  .then(() => {
+    Product.createAsync({
+      name: 'Beauty Detox Probiotics',
+      description: '',
+      amount: 4900
+    }, {
+      name: 'Detoxy+',
+      description: '',
+      amount: 2495
+    })
+    .then(() => {
+      console.log('finished populating products');
     });
   });
