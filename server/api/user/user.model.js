@@ -17,6 +17,11 @@ var UserSchema = new Schema({
     default: 'user'
   },
   password: String,
+  address1: String,
+  address2: String,
+  city: String,
+  state: String,
+  zipcode: String,
   provider: String,
   salt: String,
   facebook: {},

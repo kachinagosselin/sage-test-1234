@@ -23,6 +23,7 @@ class SettingsController {
         });
     }
   }
+
 }
 
 angular.module('paizaqaApp')

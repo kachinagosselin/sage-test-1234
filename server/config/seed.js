@@ -57,7 +57,11 @@ User.find({}).removeAsync()
       provider: 'local',
       name: 'Kachina Gosselin',
       email: 'kachina@alum.mit.edu',
-      password: 'password'
+      password: 'password',
+      address1: '1626 Myrtle St',
+      city: 'Oakland',
+      state: 'CA',
+      zipcode: '12345'
     })
     .then(() => {
       console.log('finished populating users');
