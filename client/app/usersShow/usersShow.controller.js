@@ -27,4 +27,12 @@ angular.module('paizaqaApp')
   };
 
 
+  $scope.chargeUser = function(){
+    console.log("In the charge function ")
+    $http.get('/api/products/583f6228cbab0386d1c8c644/charge').success(function(){
+      console.log("Next ...")
+    });
+  };
+
+
 });

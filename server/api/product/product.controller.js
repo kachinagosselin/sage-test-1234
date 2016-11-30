@@ -104,25 +104,25 @@ export function destroy(req, res) {
 
 export function charge(req, res) {
 // setup stripe with test API key
-var stripe = require("stripe")("sk_test_ML35uwZ12PGlbABvqi8kfc8T");
-console.log("Setup Stripe")
-// create charge using stripe module
-stripe.charges.create({
-  amount: 100,
-  currency: "usd",
-  card: {
-    number: '4242424242424242',
-    exp_month: 12,
-    exp_year: 2014,
-    cvc: '123'
-  },
-  description: "Charge for test@example.com"
-}).then(function(charge) {
-  console.log("Charge created");
-  console.log(charge);
-}, function(err) {
-  console.log(err);
-});
+    var stripe = require("stripe")(
+      ""
+      );
+    stripe.charges.create({
+      amount: 100,
+      currency: "usd",
+      card: {
+        number: '4242424242424242',
+        exp_month: 12,
+        exp_year: 2020,
+        cvc: '123'
+      },
+      description: "Charge for test@example.com"
+    }).then(function(charge) {
+      console.log("Charge created");
+      console.log(charge);
+    }, function(err) {
+      console.log(err);
+    });
 
 }
 
