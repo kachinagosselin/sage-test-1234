@@ -7,12 +7,12 @@
  * DELETE  /api/Products/:id          ->  destroy
  */
 
-'use strict';
+ 'use strict';
 
-import _ from 'lodash';
-import Product from './product.model';
+ import _ from 'lodash';
+ import Product from './product.model';
 
-function respondWithResult(res, statusCode) {
+ function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
@@ -25,9 +25,9 @@ function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
+    .spread(updated => {
+      return updated;
+    });
   };
 }
 
@@ -35,9 +35,9 @@ function removeEntity(res) {
   return function(entity) {
     if (entity) {
       return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
+      .then(() => {
+        res.status(204).end();
+      });
     }
   };
 }
@@ -62,24 +62,24 @@ function handleError(res, statusCode) {
 // Gets a list of Products
 export function index(req, res) {
   Product.findAsync()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Gets a single Product from the DB
 export function show(req, res) {
   console.log("Show")
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Creates a new Product in the DB
 export function create(req, res) {
   Product.createAsync(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+  .then(respondWithResult(res, 201))
+  .catch(handleError(res));
 }
 
 // Updates an existing Product in the DB
@@ -88,47 +88,58 @@ export function update(req, res) {
     delete req.body._id;
   }
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Deletes a Product from the DB
 export function destroy(req, res) {
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 }
 
 export function charge(req, res) {
 // setup stripe with test API key
-    var stripe = require("stripe")(
-      ""
-      );
-    stripe.charges.create({
-      amount: 100,
-      currency: "usd",
-      card: {
-        number: '4242424242424242',
-        exp_month: 12,
-        exp_year: 2020,
-        cvc: '123'
-      },
-      description: "Charge for test@example.com"
-    }).then(function(charge) {
-      console.log("Charge created");
-      console.log(charge);
-    }, function(err) {
-      console.log(err);
-    });
+var stripe = require("stripe")(
+  "sk_test_ML35uwZ12PGlbABvqi8kfc8T"
+  );
+console.log("Product ID:" + req.params.id)
+Product.findByIdAsync(req.params.id)
+.then(product => {
+  if (!product) {
+    return res.status(404).end();
+  }
+  console.log("Product:" + product)
+
+  stripe.charges.create({
+    amount: product.amount,
+    currency: "usd",
+    card: {
+      number: '4242424242424242',
+      exp_month: 12,
+      exp_year: 2020,
+      cvc: '123'
+    },
+    description: "Charge for test@example.com for purchasing " + product.name +""
+  }).then(function(charge) {
+    console.log("Charge created");
+    console.log(charge);
+  }, function(err) {
+    console.log(err);
+  });
+
+})
+.catch(handleError(res));
 
 }
 
 export function stripe(req, res) {
   Product.findByIdAsync(req.params.id)
-      .then(respondWithResult(res))
+  .then(respondWithResult(res))
 
   // const stripeToken = req.body.stripeToken;
   // const productID = parseInt(req.body.productID);
@@ -152,5 +163,5 @@ export function stripe(req, res) {
   //   });
   //   res.redirect('/products');
   // })
-    .catch(handleError(res));
+  .catch(handleError(res));
 }

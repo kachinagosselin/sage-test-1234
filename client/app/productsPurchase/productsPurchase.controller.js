@@ -18,4 +18,11 @@ angular.module('paizaqaApp')
     //     }
     //   });
     // };
+
+    $scope.chargeUser = function(){
+    console.log("In the charge function ")
+    $http.get('/api/products/' + $stateParams.id + '/charge').success(function(){
+      console.log("Next ...")
+    });
+  };
   });

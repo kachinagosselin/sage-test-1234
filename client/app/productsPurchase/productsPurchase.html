@@ -21,6 +21,8 @@
   </div>
   <div class="col-md-4">
     <h2>One time payment</h2>
+      <button type="submit" class="btn btn-primary" ng-click="chargeUser()" >Charge User!</button>
+
     <br>
      <form id="payment-form" role="form" autocomplete="on" action="/products/583c8f70ffdccd5e22f6653e/stripe" method="POST">
       <div id="charge-error" class="alert alert-danger payment-errors"></div>
