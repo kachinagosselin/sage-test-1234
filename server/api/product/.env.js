@@ -1,1 +1,0 @@
-STRIPE_SECRET_KEY=sk_test_ML35uwZ12PGlbABvqi8kfc8T
