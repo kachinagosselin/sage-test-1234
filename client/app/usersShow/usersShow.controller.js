@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paizaqaApp')
-.controller('UsersShowCtrl', function ($scope, $http, $stateParams, Auth, $location) {
+.controller('UsersShowCtrl', function ($scope, $http, $stateParams) {
 
 
   var loadUsers = function(){
@@ -19,9 +19,9 @@ angular.module('paizaqaApp')
   // };
 
   $scope.updateUser = function(){
-    console.log("In the update function ")
+    console.log('In the update function');
     $http.put('/api/users/' + $stateParams.id, $scope.user).success(function(){
-      console.log("Next ...")
+      console.log('Next ...');
       loadUsers();
     });
   };

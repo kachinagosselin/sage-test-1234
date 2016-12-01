@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('paizaqaApp')
-  .controller('ProductsIndexCtrl', function ($scope, $http, $location, Auth) {
+  .controller('ProductsIndexCtrl', function ($scope, $http) {
     $scope.busy = true;
     $scope.noMoreData = false;
 
-    $http.get('/api/products', ).success(function(products) {
+    $http.get('/api/products').success(function(products) {
       $scope.products = products;
       if($scope.products.length < 20){
         $scope.noMoreData = true;

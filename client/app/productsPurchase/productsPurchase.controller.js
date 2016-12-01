@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paizaqaApp')
-  .controller('ProductsPurchaseCtrl', function ($scope, $http, $stateParams, Auth, $location) {
+  .controller('ProductsPurchaseCtrl', function ($scope, $http, $stateParams) {
       $http.get('/api/products/' + $stateParams.id).success(function(product) {
         $scope.product = product;
       });
@@ -20,9 +20,9 @@ angular.module('paizaqaApp')
     // };
 
     $scope.chargeUser = function(){
-    console.log("In the charge function ")
+    console.log('In the charge function');
     $http.get('/api/products/' + $stateParams.id + '/charge').success(function(){
-      console.log("Next ...")
+      console.log('Next ...');
     });
   };
   });
