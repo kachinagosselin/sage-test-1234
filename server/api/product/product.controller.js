@@ -105,7 +105,7 @@ export function destroy(req, res) {
 export function charge(req, res) {
 // setup stripe with test API key
 var stripe = require("stripe")(
-  "sk_test_ML35uwZ12PGlbABvqi8kfc8T"
+  process.env.STRIPE_SECRET_KEY
   );
 console.log("Product ID:" + req.params.id)
 Product.findByIdAsync(req.params.id)
@@ -114,6 +114,7 @@ Product.findByIdAsync(req.params.id)
     return res.status(404).end();
   }
   console.log("Product:" + product)
+console.log("ENV VARIABLES" + process.env.STRIPE_SECRET_KEY)
 
   stripe.charges.create({
     amount: product.amount,
