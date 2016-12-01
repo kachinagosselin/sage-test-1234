@@ -114,7 +114,6 @@ Product.findByIdAsync(req.params.id)
     return res.status(404).end();
   }
   console.log("Product:" + product)
-console.log("ENV VARIABLES" + process.env.STRIPE_SECRET_KEY)
 
   stripe.charges.create({
     amount: product.amount,
@@ -129,12 +128,20 @@ console.log("ENV VARIABLES" + process.env.STRIPE_SECRET_KEY)
   }).then(function(charge) {
     console.log("Charge created");
     console.log(charge);
+
+    Transaction.createAsync({
+      stripe_transaction: charge.id,
+      product_id: product.id
+      //      user_id: req.user
+
+    })
+
   }, function(err) {
     console.log(err);
   });
 
-})
-.catch(handleError(res));
+  })
+  .catch(handleError(res));
 
 }
 

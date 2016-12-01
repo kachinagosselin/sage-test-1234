@@ -31,7 +31,8 @@ var UserSchema = new Schema({
   credits: {
     type: Number,
     default: 0
-  }
+  },
+  customer_id: String
 });
 
 /**

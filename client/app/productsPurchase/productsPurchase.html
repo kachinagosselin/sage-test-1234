@@ -1,31 +1,27 @@
+<!-- jQuery is used only for this example; it isn't required to use Stripe -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript" src="validation.js"></script>
 
-<h1>Ready to buy?</h1>
+
+<h2 style="padding:15px;">{{ product.name }}<span style="float:right;"><em>${{ product.amount/100 }}</em></span></h2>
 <hr><br>
 <div class="row">
-  <div class="col-md-4">
-    <div>
-      <h2>You are buying:</h2>
-      <ul>
-        <li>Product Name: <em>{{ product.name }}</em></li>
-        <li>Amount: <em>${{ product.amount/100 }}</em></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Use this info for testing:</h2>
-      <ul>
-        <li>Card Number: 4242-4242-4242-4242</li>
-        <li>CVC Code: any three digits</li>
-        <li>Expiration: any date in the future</li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-4">
+  <div class="col-md-6 col-md-offset-3">
+
+    <h2>Use this info for testing:</h2>
+    <ul>
+      <li>Card Number: 4242-4242-4242-4242</li>
+      <li>CVC Code: any three digits</li>
+      <li>Expiration: any date in the future</li>
+    </ul>
+
     <h2>One time payment</h2>
-      <button type="submit" class="btn btn-primary" ng-click="chargeUser()" >Charge User!</button>
+    <button type="submit" class="btn btn-primary" ng-click="chargeUser()" >Charge User!</button>
 
     <br>
-     <form id="payment-form" role="form" autocomplete="on" action="/products/583c8f70ffdccd5e22f6653e/stripe" method="POST">
-      <div id="charge-error" class="alert alert-danger payment-errors"></div>
+      <form id="payment-form" role="form" autocomplete="on" action="/products/charge" method="POST">
+      <!--       <div id="charge-error" class="alert alert-danger payment-errors"></div>  -->
       <div class="form-group">
         <label>Credit Card Info</label>
         <input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
@@ -39,29 +35,13 @@
       </div>
       <input style="display:none" name="productAmount" value="{{ product.amount }}">
       <input style="display:none" name="productName" value="{{ product.name }}">
-      <input style="display:none" name="productID" value="{{ product.id }}">
+      <input style="display:none" name="productID" value="{{ product._id }}">
       <button type="submit" class="btn btn-primary submit-button btn-block">Submit</button>
     </form> 
 
-    <form action="/charge" method="POST">
-             <input type='hidden' name='_csrf' value=_csrf>
-
-          <button type="submit" class="btn btn-primary submit-button btn-block">Submit</button>
-
-    <!--
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_kyhDtmaBz5TsUh2F82TIBurr"
-            data-name="Test Data"
-            data-description="Testing Stripe Charge"
-            data-amount="100"
-            data-billing-address="true"
-            data-label="One Click Billing"
-    > 
-    </script>
-    -->
-
-</form>
-  </div>
+<!--      <input type='hidden' name='_csrf' value=_csrf>
+ -->
+</div>
 
 </div>
 

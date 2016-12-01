@@ -61,7 +61,8 @@ User.find({}).removeAsync()
       address1: '1626 Myrtle St',
       city: 'Oakland',
       state: 'CA',
-      zipcode: '12345'
+      zipcode: '12345',
+      customer_id: 'cus_9fOBwPKUOCkEQz'
     })
     .then(() => {
       console.log('finished populating users');
