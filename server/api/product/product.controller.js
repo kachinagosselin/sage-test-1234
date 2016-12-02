@@ -11,6 +11,7 @@
 
  import _ from 'lodash';
  import Product from './product.model';
+ import Transaction from '../transaction/transaction.model';
 
  function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -103,6 +104,8 @@ export function destroy(req, res) {
 }
 
 export function charge(req, res) {
+    console.log("User Request:" + req.user)
+
 // setup stripe with test API key
 var stripe = require("stripe")(
   process.env.STRIPE_SECRET_KEY
@@ -118,12 +121,13 @@ Product.findByIdAsync(req.params.id)
   stripe.charges.create({
     amount: product.amount,
     currency: "usd",
-    card: {
-      number: '4242424242424242',
-      exp_month: 12,
-      exp_year: 2020,
-      cvc: '123'
-    },
+    customer: req.user.customer_id,
+    // card: {
+    //   number: '4242424242424242',
+    //   exp_month: 12,
+    //   exp_year: 2020,
+    //   cvc: '123'
+    // },
     description: "Charge for test@example.com for purchasing " + product.name +""
   }).then(function(charge) {
     console.log("Charge created");
@@ -140,8 +144,8 @@ Product.findByIdAsync(req.params.id)
     console.log(err);
   });
 
-  })
-  .catch(handleError(res));
+})
+.catch(handleError(res));
 
 }
 

@@ -27,31 +27,7 @@
       <p id="product-response"></p>
     </div>
 
-    <div class="col-md-6 col-md-offset-1">
-        <h3>Total transactions: <span class="total"><em>{{ transactions.length }}</em></span></h3>
-        <br>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>UUID</th>
-              <th>Token</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for transaction in transactions %}
-              <td>{{ transaction.id }}</td>
-              <td>
-                <a href="https://dashboard.stripe.com/test/logs?object={{ transaction.stripe_transaction }}" target="_blank">
-                  {{ transaction.stripe_transaction }}
-                </a>
-              </td>
-              <td>{{ transaction.purchase_time }}</td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-    </div>
+    
   </div>
 
 </div>

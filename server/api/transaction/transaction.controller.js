@@ -11,6 +11,7 @@
 
  import _ from 'lodash';
  import Transaction from './transaction.model';
+ import Product from '../product/product.model';
 
  function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;

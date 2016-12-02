@@ -1,0 +1,32 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Transactions</h1>
+<!--     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+ -->  </div>
+</header>
+
+<div class="container" infinite-scroll='nextPage()' infinite-scroll-disabled='busy || noMoreData'>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Token</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr ng-repeat="transaction in transactions">
+              <td>{{ transaction._id}}</td>
+              <td>
+                <a href="https://dashboard.stripe.com/test/logs?object={{ transaction.stripe_transaction }}" target="_blank">
+                  {{ transaction.stripe_transaction }}
+                </a>
+              </td>
+              <td><a href="/products/show/{{ transaction.product_id }}">{{ transaction.product_id }}</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+  <div ng-show='busy'>Loading data...</div>
+</div>

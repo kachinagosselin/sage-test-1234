@@ -5,7 +5,7 @@ angular.module('paizaqaApp')
     $stateProvider
       .state('productIndex', {
         url: '/products',
-        templateUrl: 'app/admin/productsIndex/productsIndex.html',
+        templateUrl: 'app/productsIndex/productsIndex.html',
         controller: 'ProductsIndexCtrl'
       });
 
