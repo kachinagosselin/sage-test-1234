@@ -150,16 +150,22 @@ Product.findByIdAsync(req.params.id)
 }
 
 export function stripe(req, res) {
-  Product.findByIdAsync(req.params.id)
+  var stripeToken = req.body.stripeToken;
+      console.log("StripeTOKEN:" + stripeToken);
+  var productID = parseInt(req.body.productID);
+      console.log("ProductID:" + productID);
+  var productAmount = req.body.productAmount;
+      console.log("Amount:" + productAmount);
+  //var userID = parseInt(req.user.id);
+  //    console.log("UserID:" + userID);
+
+    Product.findByIdAsync(req.params.id)
   .then(respondWithResult(res))
 
-  // const stripeToken = req.body.stripeToken;
-  // const productID = parseInt(req.body.productID);
-  // const productAmount = req.body.productAmount;
-  // const userID = parseInt(req.user.id);
+
   // // validate product
   // return routeHelpers.validateProduct(productID, productAmount)
-  // .then((product) => {
+  //.then((product) => {
   //   // create charge
   //   const charge = {
   //     amount: productAmount,
