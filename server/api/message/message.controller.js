@@ -102,6 +102,9 @@ function handleError(res, statusCode) {
 
 export function index(req, res) {
   console.log("In index ...");
+}
+
+export function update(req, res) {
 
   var Watson = require( 'watson-developer-cloud/conversation/v1' );  // watson sdk
 
@@ -151,7 +154,7 @@ conversation.message( payload, function(err, data) {
  if ( err ) {
    return res.status( err.code || 500 ).json( err );
  }
- return res.json( updateMessage( payload, data ) );
+ //return res.json( updateMessage( payload, data ) );
 } );
 
 if ( !workspace ) {
