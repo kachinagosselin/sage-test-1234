@@ -20,6 +20,7 @@
   <!-- build:css({.tmp,client}) app/app.css -->
   <link rel="stylesheet" href="app/app.css">
   <!-- injector:css -->
+  <link rel="stylesheet" href="app/home/home.css">
   <!-- endinjector -->
   <!-- endbuild -->
 
@@ -39,6 +40,7 @@
   <link rel="stylesheet" href="../../assets/vendor/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="../../assets/vendor/device-mockups/device-mockups.min.css">
   <link rel="stylesheet" href="/app/home/home.css" type="text/css">
+  <link rel="stylesheet" href="/app/home/sidebar.scss" type="text/css">
 
   <!-- Theme CSS -->
 
@@ -56,7 +58,9 @@
 
       <!-- Add your site or application content here -->
       <navbar></navbar>
+      <div class="main">
       <div ui-view="" style="height:600px !important;"></div>
+      </div>
 <!--       <footer></footer>
  -->
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

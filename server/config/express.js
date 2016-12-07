@@ -19,6 +19,7 @@
  import session from 'express-session';
  import connectMongo from 'connect-mongo';
  import mongoose from 'mongoose';
+
  var mongoStore = connectMongo(session);
 
  export default function(app) {
