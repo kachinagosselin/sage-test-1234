@@ -5,8 +5,8 @@ angular.module('paizaqaApp')
   $scope.busy = true;
   $scope.noMoreData = false;
 
-	$http.get('/api/messages').success(function(messages) {
-		console.log("Call once ... ")
+	$http.get('/api/messages').success(function() {
+		console.log('Call once ... ');
 	});
 
 });
