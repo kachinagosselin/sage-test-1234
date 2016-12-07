@@ -2,28 +2,11 @@
 // all display and behaviors of the conversation column of the app.
 /* eslint no-unused-vars: "off" */
 /* global Api: true, Common: true*/
+'use strict';
 
 var ConversationPanel = (function() {
-  var settings = {
-    selectors: {
-      chatBox: '#scrollingChat',
-      fromUser: '.from-user',
-      fromWatson: '.from-watson',
-      latest: '.latest'
-    },
-    authorTypes: {
-      user: 'user',
-      watson: 'watson'
-    }
-  };
 
-  // Publicly accessible methods defined
-  return {
-    init: init,
-    inputKeyDown: inputKeyDown
-  };
-
-  // Initialize the module
+    // Initialize the module
   function init() {
     chatUpdateSetup();
     Api.sendRequest( '', null );
@@ -92,8 +75,7 @@ var ConversationPanel = (function() {
         var htmlElem = document.getElementsByTagName('html')[0];
         var currentFontSize = parseInt(window.getComputedStyle(htmlElem, null).getPropertyValue('font-size'), 10);
         if (currentFontSize) {
-          padding = Math.floor((currentFontSize - minFontSize) / (maxFontSize - minFontSize)
-            * (maxPadding - minPadding) + minPadding);
+          padding = Math.floor((currentFontSize - minFontSize) / (maxFontSize - minFontSize) * (maxPadding - minPadding) + minPadding);
         } else {
           padding = maxPadding;
         }
@@ -115,15 +97,12 @@ var ConversationPanel = (function() {
   // Display a user or Watson message that has just been sent/received
   function displayMessage(newPayload, typeValue) {
     var isUser = isUserMessage(typeValue);
-    var textExists = (newPayload.input && newPayload.input.text)
-      || (newPayload.output && newPayload.output.text);
+    var textExists = (newPayload.input && newPayload.input.text) || (newPayload.output && newPayload.output.text);
     if (isUser !== null && textExists) {
       // Create new message DOM element
       var messageDivs = buildMessageDomElements(newPayload, isUser);
       var chatBoxElement = document.querySelector(settings.selectors.chatBox);
-      var previousLatest = chatBoxElement.querySelectorAll((isUser
-              ? settings.selectors.fromUser : settings.selectors.fromWatson)
-              + settings.selectors.latest);
+      var previousLatest = chatBoxElement.querySelectorAll((isUser ? settings.selectors.fromUser : settings.selectors.fromWatson) + settings.selectors.latest);
       // Previous "latest" message is no longer the most recent
       if (previousLatest) {
         Common.listForEach(previousLatest, function(element) {
@@ -199,8 +178,7 @@ var ConversationPanel = (function() {
     var scrollingChat = document.querySelector('#scrollingChat');
 
     // Scroll to the latest message sent by the user
-    var scrollEl = scrollingChat.querySelector(settings.selectors.fromUser
-            + settings.selectors.latest);
+    var scrollEl = scrollingChat.querySelector(settings.selectors.fromUser + settings.selectors.latest);
     if (scrollEl) {
       scrollingChat.scrollTop = scrollEl.offsetTop;
     }
@@ -225,4 +203,23 @@ var ConversationPanel = (function() {
       Common.fireEvent(inputBox, 'input');
     }
   }
+  var settings = {
+    selectors: {
+      chatBox: '#scrollingChat',
+      fromUser: '.from-user',
+      fromWatson: '.from-watson',
+      latest: '.latest'
+    },
+    authorTypes: {
+      user: 'user',
+      watson: 'watson'
+    }
+  };
+
+  // Publicly accessible methods defined
+  return {
+    init: init,
+    inputKeyDown: inputKeyDown
+  };
+
 }());

@@ -1,16 +1,11 @@
 // The Common module is designed as an auxiliary module
 // to hold functions that are used in multiple other modules
 /* eslint no-unused-vars: "off" */
+'use strict';
 
-var Common = (function() {
-  // Publicly accessible methods defined
-  return {
-    buildDomElement: buildDomElementFromJson,
-    fireEvent: fireEvent,
-    listForEach: listForEach
-  };
+const Common = (function() {
 
-  // Take in JSON object and build a DOM element out of it
+    // Take in JSON object and build a DOM element out of it
   // (Limited in scope, cannot necessarily create arbitrary DOM elements)
   // JSON Example:
   //  {
@@ -77,4 +72,11 @@ var Common = (function() {
       callback.call(null, list[i]);
     }
   }
+  // Publicly accessible methods defined
+  return {
+    buildDomElement: buildDomElementFromJson,
+    fireEvent: fireEvent,
+    listForEach: listForEach
+  };
+
 }());

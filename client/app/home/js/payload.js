@@ -2,28 +2,11 @@
 // all display and behaviors of the conversation column of the app.
 /* eslint no-unused-vars: "off" */
 /* global Api: true, Common: true, PayloadPanel: true*/
+'use strict';
 
 var PayloadPanel = (function() {
-  var settings = {
-    selectors: {
-      payloadColumn: '#payload-column',
-      payloadInitial: '#payload-initial-message',
-      payloadRequest: '#payload-request',
-      payloadResponse: '#payload-response'
-    },
-    payloadTypes: {
-      request: 'request',
-      response: 'response'
-    }
-  };
 
-  // Publicly accessible methods defined
-  return {
-    init: init,
-    togglePanel: togglePanel
-  };
-
-  // Initialize the module
+ // Initialize the module
   function init() {
     payloadUpdateSetup();
   }
@@ -65,8 +48,7 @@ var PayloadPanel = (function() {
     if (isRequest !== null) {
       // Create new payload DOM element
       var payloadDiv = buildPayloadDomElement(isRequest);
-      var payloadElement = document.querySelector(isRequest
-              ? settings.selectors.payloadRequest : settings.selectors.payloadResponse);
+      var payloadElement = document.querySelector(isRequest ? settings.selectors.payloadRequest : settings.selectors.payloadResponse);
       // Clear out payload holder element
       while (payloadElement.lastChild) {
         payloadElement.removeChild(payloadElement.lastChild);
@@ -96,8 +78,7 @@ var PayloadPanel = (function() {
 
   // Constructs new DOM element to use in displaying the payload
   function buildPayloadDomElement(isRequest) {
-    var payloadPrettyString = jsonPrettyPrint(isRequest
-            ? Api.getRequestPayload() : Api.getResponsePayload());
+    var payloadPrettyString = jsonPrettyPrint(isRequest  ? Api.getRequestPayload() : Api.getResponsePayload());
 
     var payloadJson = {
       'tagName': 'div',
@@ -169,4 +150,24 @@ var PayloadPanel = (function() {
     }
     return lineString;
   }
+
+  var settings = {
+    selectors: {
+      payloadColumn: '#payload-column',
+      payloadInitial: '#payload-initial-message',
+      payloadRequest: '#payload-request',
+      payloadResponse: '#payload-response'
+    },
+    payloadTypes: {
+      request: 'request',
+      response: 'response'
+    }
+  };
+
+  // Publicly accessible methods defined
+  return {
+    init: init,
+    togglePanel: togglePanel
+  };
+
 }());

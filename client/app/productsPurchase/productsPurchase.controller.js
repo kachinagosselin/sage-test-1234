@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paizaqaApp')
-.controller('ProductsPurchaseCtrl', function ($scope, $http, $stateParams, Auth) {
+.controller('ProductsPurchaseCtrl', function ($scope, $http, $stateParams) {
 	$http.get('/api/products/' + $stateParams.id).success(function(product) {
 		$scope.product = product;
 	});
@@ -15,7 +15,7 @@ angular.module('paizaqaApp')
 	};
 
 	$scope.getURL = function (productID) {
-		return '/api/products/' + productID + '/stripe'
+		return '/api/products/' + productID + '/stripe';
 	};
 
 });
