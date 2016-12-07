@@ -10,7 +10,7 @@ class NavbarController {
     this.menu = [
       {
         'title': 'All',
-        'link': function(){return '/';},
+        'link': function(){return '/questions';},
         'show': function(){return true;},
       },
       {

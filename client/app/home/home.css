@@ -273,7 +273,7 @@ body{
 }
 
 #payload-column.full {
-  width: 100%;
+  width: 0%;
   max-width: none;
   min-width: initial;
 }
