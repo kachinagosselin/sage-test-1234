@@ -6,7 +6,7 @@ var controller = require('./message.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.post('/', controller.update);
+router.post('/conversation', controller.update);
 router.get('/twilio', controller.sendTwilio);
 //router.post('/', controller.create);
 //router.put('/:id', controller.updateMessage);

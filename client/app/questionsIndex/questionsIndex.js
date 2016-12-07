@@ -3,11 +3,6 @@
 angular.module('paizaqaApp')
 .config(function ($stateProvider) {
   $stateProvider
-  .state('home', {
-    url: '/',
-    templateUrl: 'app/home/home.html',
-    controller: 'QuestionsIndexCtrl',
-  })
   .state('main', {
     url: '/questions?keyword',
     templateUrl: 'app/questionsIndex/questionsIndex.html',

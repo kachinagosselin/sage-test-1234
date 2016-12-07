@@ -5,9 +5,4 @@ angular.module('paizaqaApp')
   $scope.busy = true;
   $scope.noMoreData = false;
 
-  $http.get('/api/messages').success(function(products) {
-    $scope.busy = false;
-
-  });
-
 });

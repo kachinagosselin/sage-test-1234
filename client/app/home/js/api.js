@@ -3,7 +3,7 @@
 var Api = (function() {
   var requestPayload;
   var responsePayload;
-  var messageEndpoint = '/api/messages';
+  var messageEndpoint = '/api/messages/conversation';
 
   // Publicly accessible methods defined
   return {
